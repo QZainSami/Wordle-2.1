@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Wordle 2.1.vcxproj" />
+  <Project Path="Wordle 2.1.vcxproj" Id="89ce9623-f854-45da-93e2-7e290fb269f4" />
 </Solution>

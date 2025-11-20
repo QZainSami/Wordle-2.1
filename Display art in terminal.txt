@@ -7,7 +7,7 @@ to display emojis
 STEP 1 — Force terminal to UTF-8
 temporary fix, goes away after restarting terminal
 3.In Windows Terminal → PowerShell, run this once: [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
-4. run code: .\Wordle2.1.exe 
+4. run code: .\"Wordle 2.1.exe" 
 
 permanent fix:
 
