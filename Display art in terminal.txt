@@ -1,0 +1,39 @@
+to display emojis
+
+1. open terminal
+2. cd to project: cd "C:\Users\qsami\source\repos\Wordle 2.1\x64\Debug"
+
+
+STEP 1 — Force terminal to UTF-8
+temporary fix, goes away after restarting terminal
+3.In Windows Terminal → PowerShell, run this once: [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
+4. run code: .\Wordle2.1.exe 
+
+permanent fix:
+
+STEP 1 — Check if you have a PowerShell profile
+Open Windows Terminal → PowerShell, then run: Test-Path $PROFILE
+If it prints: false
+Create it: New-Item -Path $PROFILE -Type File -Force
+
+STEP 2 — Open the PowerShell profile
+Run: notepad $PROFILE
+This will open a file like: C:\Users\<you>\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+
+STEP 3 — Add this line to the profile
+Paste this into the file: [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
+
+OPTIONAL — Also force UTF-8 input (recommended)
+$OutputEncoding = [System.Text.UTF8Encoding]::new()
+Save → Close Notepad.
+
+if u get Microsoft.PowerShell_profile.ps1 cannot be loaded because running scripts is disabled on this system.
+
+either Open PowerShell as Administrator
+or
+Allow only the current user to run scripts
+Run this command: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+Press Y when asked.
+This is safe because:
+It affects only your user, not the whole system
+It allows only local scripts unless signed
