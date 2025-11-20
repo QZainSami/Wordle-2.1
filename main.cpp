@@ -67,8 +67,17 @@ int main() {
             }
 
             Wordle game;
-            game.resetGame(static_cast<Difficulty>(diffChoice));
-            game.play();
+            try {
+                game.resetGame(static_cast<Difficulty>(diffChoice));
+                game.play();
+            }
+            catch (const std::exception& ex) {
+                cerr << RED << "Exception: " << ex.what() << RESET << endl;
+                cerr << RED << "Program aborted due to exception." << RESET << endl;
+            }
+            catch (...) {
+                cerr << RED << "Unknown exception occurred." << RESET << endl;
+            }
 
             cout << "\nDo you want to play again? (y/n): ";
             char again; cin >> again;

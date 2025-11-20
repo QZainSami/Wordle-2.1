@@ -3,7 +3,7 @@
 #define WORDLE_CONFIG_H
 
 // Shared configuration constants
-const int MAX_WORDS = 500;
+const int MAX_WORDS = 1000;
 const int MAX_WORD_LENGTH = 7;  // Maximum word length + 1 for null terminator
 
 // Difficulty-based configuration

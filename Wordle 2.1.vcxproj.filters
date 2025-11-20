@@ -13,10 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{913ca247-0f7f-4d89-8d33-ef4b9aca4205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ReadMe">
+      <UniqueIdentifier>{336f1f71-746b-4a03-acee-8fb3b786318f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="bestscore.txt" />
-    <Text Include="Display art in terminal.txt" />
+    <Text Include="scripts\words_alpha.txt">
+      <Filter>Scripts</Filter>
+    </Text>
+    <Text Include="ReadMe\Display art in terminal.txt">
+      <Filter>ReadMe</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colors.h">
@@ -31,6 +42,9 @@
     <ClInclude Include="Wordle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Wordle_wordlists.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GuessList.cpp">
@@ -42,10 +56,34 @@
     <ClCompile Include="Wordle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Wordle_wordlists.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Wordle_wordlists_all.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DSA_IMPLEMENTATION.md" />
-    <None Include="README_DSA.md" />
-    <None Include="VISUAL_ENHANCEMENTS.md" />
+    <None Include="scripts\fetch_wordle_answers.py">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="scripts\generate_wordlists_full.py">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="scripts\skibidi.py">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="scripts\skibidi2.py">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="ReadMe\DSA_IMPLEMENTATION.md">
+      <Filter>ReadMe</Filter>
+    </None>
+    <None Include="ReadMe\README_DSA.md">
+      <Filter>ReadMe</Filter>
+    </None>
+    <None Include="ReadMe\VISUAL_ENHANCEMENTS.md">
+      <Filter>ReadMe</Filter>
+    </None>
   </ItemGroup>
 </Project>

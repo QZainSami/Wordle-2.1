@@ -1,119 +1,16 @@
 ﻿#include "Wordle.h"
+#include "Wordle_wordlists.h"
 #include <iostream>
 #include <cstring>
+// Add near other includes
+#include <random>
+#include <chrono>
+
+// file-scope RNG seeded once per run
+static std::mt19937 rng(static_cast<unsigned int>(
+    std::chrono::high_resolution_clock::now().time_since_epoch().count()));
+
 using namespace std;
-
-// DSA: 300 Easy 4-letter words
-char easyWords[300][5] = {
-"able","acid","aged","also","area","army","away","baby","back","ball",
-"band","bank","base","bath","bear","beat","been","beer","bell","belt",
-"best","bill","bird","blow","blue","boat","body","bomb","bond","bone",
-"book","boom","born","boss","both","bowl","bulk","bull","burn","bush",
-"busy","cake","call","calm","came","camp","card","care","case","cash",
-"cast","cell","chat","chip","city","clay","club","coal","coat","code",
-"cold","come","cool","cope","copy","core","cost","crew","crop","dark",
-"data","date","dawn","days","dead","deal","dear","debt","deck","deep",
-"deny","desk","dial","diet","disc","disk","done","door","dose","down",
-"draw","drew","drop","drug","dual","duck","duke","dull","dust","duty",
-"each","earl","earn","ease","east","easy","edge","else","even","ever",
-"evil","exam","exit","face","fact","fail","fair","fall","farm","fast",
-"fate","fear","feed","feel","feet","fell","felt","file","fill","film",
-"find","fine","fire","firm","fish","five","flag","flat","flew","flow",
-"folk","food","foot","ford","form","fort","four","free","from","fuel",
-"full","fund","gain","game","gate","gave","gear","gene","gift","girl",
-"give","glad","goal","goes","gold","gone","good","gray","grew","grey",
-"grip","grow","gulf","hall","hand","hang","hard","harm","hate","have",
-"head","hear","heat","held","hell","help","here","hero","hide","high",
-"hill","hire","hold","hole","holy","home","hope","host","hour","huge",
-"hung","hunt","hurt","idea","idle","inch","into","iron","item","jack",
-"jane","jean","john","join","jump","jury","just","keen","keep","kent",
-"kept","kick","kill","kind","king","knee","knew","know","lack","lady",
-"laid","lake","land","lane","last","late","lead","left","less","life",
-"lift","like","line","link","list","live","load","loan","lock","lone",
-"long","look","lord","lose","loss","lost","love","luck","made","mail",
-"main","make","male","many","mark","mars","mass","mate","math","meal",
-"mean","meat","meet","menu","mere","mile","milk","mill","mind","mine",
-"miss","mode","mood","moon","more","most","move","much","must","name",
-"navy","near","neck","need","news","next","nice","nick","nine","none"
-};
-
-// DSA: 400 Medium 5-letter words  
-char mediumWords[400][6] = {
-"about","above","abuse","actor","acute","admit","adopt","adult","after","again",
-"agent","agree","ahead","alarm","album","alert","alike","alive","allow","alone",
-"along","alter","amber","among","angel","anger","angle","angry","apart","apple",
-"apply","arena","argue","arise","array","arrow","aside","asset","audio","avoid",
-"awake","award","aware","badly","baker","bases","basic","basis","beach","began",
-"begin","being","below","bench","billy","birth","black","blade","blame","blank",
-"blast","bleed","blend","bless","blind","block","blood","bloom","blown","blues",
-"board","boost","booth","bound","bowel","boxer","brain","brake","brand","brass",
-"brave","bread","break","breed","brief","bring","broad","broke","brown","brush",
-"buddy","build","built","bunch","burke","burnt","burst","buyer","cable","calif",
-"camel","canal","candy","canon","cards","cargo","carol","carry","catch","cause",
-"chain","chair","chaos","charm","chart","chase","cheap","check","chest","chief",
-"child","china","chose","civil","claim","class","clean","clear","click","cliff",
-"climb","clock","close","cloth","cloud","coach","coast","could","count","coupe",
-"court","cover","crack","craft","crash","crazy","cream","creek","crime","cross",
-"crowd","crown","crude","curve","cycle","daily","dance","dates","dealt","death",
-"debut","delay","delta","dense","depot","depth","derby","devil","diana","diary",
-"dicey","dirty","disco","doing","doubt","dozen","draft","drama","drank","drawn",
-"dream","dress","drill","drink","drive","drove","dying","eager","eagle","early",
-"earth","eight","elite","empty","enemy","enjoy","enter","entry","equal","error",
-"event","every","exact","exist","extra","faith","false","fancy","fatal","fault",
-"fence","fibre","field","fifth","fifty","fight","final","first","fixed","flash",
-"fleet","floor","fluid","focus","force","forth","forty","forum","found","frame",
-"frank","fraud","fresh","front","fruit","fully","funny","giant","given","glass",
-"globe","glory","goods","grace","grade","grain","grand","grant","grass","grave",
-"great","green","gross","group","grown","guard","guess","guest","guide","guild",
-"happy","harry","heart","heavy","hence","henry","horse","hotel","house","human",
-"ideal","image","imply","index","inner","input","issue","japan","jimmy","jones",
-"judge","knife","known","label","large","laser","later","laugh","laura","layer",
-"learn","lease","least","leave","legal","lemon","level","lewis","light","limit",
-"links","lives","local","logic","loose","lower","loyal","lucky","lunch","lying",
-"magic","major","maker","march","maria","match","maybe","mayor","meant","media",
-"metal","might","minor","minus","mixed","model","money","month","moral","motor",
-"mount","mouse","mouth","moved","movie","music","needs","nerve","never","newly",
-"night","noise","north","noted","novel","nurse","occur","ocean","offer","often",
-"order","other","ought","outer","owned","owner","paint","panel","paper","paris",
-"party","peace","peter","phase","phone","photo","piano","piece","pilot","pitch",
-"place","plain","plane","plant","plate","plaza","point","poker","polar","pound",
-"power","press","price","pride","prime","print","prior","prize","proof","proud",
-"prove","queen","query","queue","quick","quiet","quite","quote","radio","raise"
-};
-
-// DSA: 300 Hard 6-letter words
-char hardWords[300][8] = {
-"abroad","accept","access","across","acting","action","active","actual","advice","affect",
-"afford","afraid","agency","agenda","almost","always","amount","animal","annual","answer",
-"anyone","anyway","appeal","appear","around","arrive","artist","aspect","assess","assign",
-"assist","assume","attack","attend","august","author","avenue","backed","ballot","banker",
-"barely","barrel","basket","battle","beauty","became","become","before","behalf","behind",
-"belief","belong","berlin","beside","better","beyond","bishop","border","bottle","bottom",
-"bought","branch","breach","breath","bridge","bright","broken","bronze","budget","burden",
-"bureau","button","camera","cancer","cannot","canvas","carbon","career","castle","casual",
-"caught","center","centre","chance","change","charge","choice","choose","chosen","chrome",
-"church","circle","client","closed","closer","coffee","column","combat","coming","common",
-"comply","copper","corner","corpus","costly","county","couple","course","covers","create",
-"credit","crisis","custom","damage","danger","dealer","debate","decade","decide","defeat",
-"defend","define","degree","demand","depend","deputy","desert","design","desire","detail",
-"detect","device","differ","dinner","direct","divide","doctor","dollar","domain","double",
-"driven","driver","during","easier","easily","eating","editor","effect","effort","eighth",
-"either","empire","employ","enable","ending","energy","engage","engine","enough","ensure",
-"entire","entity","equity","escape","estate","ethnic","europe","events","exceed","except",
-"excess","expand","expect","expert","export","extend","extent","fabric","facial","factor",
-"failed","fairly","fallen","family","famous","father","fellow","female","figure","filing",
-"finger","finish","fiscal","flight","flying","follow","forced","forest","forget","formal",
-"format","former","foster","fought","fourth","france","french","friend","future","galaxy",
-"garden","gather","gender","gentle","german","global","golden","ground","growth","guilty",
-"handed","handle","happen","hardly","hatred","headed","health","heaven","height","hidden",
-"highly","holder","honest","horror","hotels","hours","housed","human","hunger","hunter",
-"impact","import","impose","income","indeed","injury","inside","intend","intent","invest",
-"island","itself","jersey","joseph","jungle","junior","labour","latest","latter","launch",
-"lawyer","leader","league","length","lesson","letter","lights","likely","linked","liquid",
-"listen","little","living","loaded","locate","locked","london","losing","lovely","luxury",
-"mainly","making","manage","manner","manual","margin","marine","marked","market","married",
-"martin","master","matter","mature","medium","member","memory","mental","merely","merged"
-};
 
 // Constructor
 Wordle::Wordle() {
@@ -151,37 +48,43 @@ void Wordle::initializeHintQueue() {
 void Wordle::resetGame(Difficulty diff) {
     currentDifficulty = diff;
 
-    // Set word length and attempts based on difficulty
+    // Set word length and attempts based on difficulty and copy words into dictionary
+    int originalCount = 0;
     if (diff == EASY) {
         currentWordLen = EASY_WORD_LEN;
         maxAttempts = EASY_ATTEMPTS;
-        wordCount = 300;
-        // Copy easy words (4-letter)
-        for (int i = 0; i < 300; i++) {
+        originalCount = EASY_WORD_COUNT;
+        for (int i = 0; i < originalCount && i < MAX_WORDS; ++i)
             strcpy_s(dictionary[i], MAX_WORD_LENGTH, easyWords[i]);
-        }
     }
     else if (diff == MEDIUM) {
         currentWordLen = MEDIUM_WORD_LEN;
         maxAttempts = MEDIUM_ATTEMPTS;
-        wordCount = 400;
-        // Copy medium words (5-letter)
-        for (int i = 0; i < 400; i++) {
+        originalCount = MEDIUM_WORD_COUNT;
+        for (int i = 0; i < originalCount && i < MAX_WORDS; ++i)
             strcpy_s(dictionary[i], MAX_WORD_LENGTH, mediumWords[i]);
-        }
     }
-    else { // HARD
+    else {
         currentWordLen = HARD_WORD_LEN;
         maxAttempts = HARD_ATTEMPTS;
-        wordCount = 300;
-        // Copy hard words (6-letter)
-        for (int i = 0; i < 300; i++) {
+        originalCount = HARD_WORD_COUNT;
+        for (int i = 0; i < originalCount && i < MAX_WORDS; ++i)
             strcpy_s(dictionary[i], MAX_WORD_LENGTH, hardWords[i]);
-        }
     }
 
-    // Pick random secret word
-    strcpy_s(secretWord, MAX_WORD_LENGTH, dictionary[rand() % wordCount]);
+    // Use only the number of words actually copied into `dictionary`
+    wordCount = (originalCount > MAX_WORDS) ? MAX_WORDS : originalCount;
+
+    if (wordCount <= 0) {
+        cerr << RED << "Error: word list empty for chosen difficulty. Check Wordle_wordlists.cpp or Wordle_wordlists.h" << RESET << endl;
+        // Safe fallback
+        wordCount = 1;
+        strcpy_s(dictionary[0], MAX_WORD_LENGTH, "test");
+    }
+
+    // Pick random secret word (now safe because wordCount reflects copied entries)
+    std::uniform_int_distribution<int> distIndex(0, wordCount - 1);
+    strcpy_s(secretWord, MAX_WORD_LENGTH, dictionary[distIndex(rng)]);
 
     // Initialize DSA structures
     guesses.clear();

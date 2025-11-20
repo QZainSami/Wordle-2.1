@@ -130,23 +130,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="bestscore.txt" />
-    <Text Include="Display art in terminal.txt" />
+    <Text Include="ReadMe\Display art in terminal.txt" />
+    <Text Include="scripts\words_alpha.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="colors.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="GuessList.h" />
     <ClInclude Include="Wordle.h" />
+    <ClInclude Include="Wordle_wordlists.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GuessList.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="scripts\Wordle_wordlists_all.cpp" />
     <ClCompile Include="Wordle.cpp" />
+    <ClCompile Include="Wordle_wordlists.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DSA_IMPLEMENTATION.md" />
-    <None Include="README_DSA.md" />
-    <None Include="VISUAL_ENHANCEMENTS.md" />
+    <None Include="ReadMe\DSA_IMPLEMENTATION.md" />
+    <None Include="ReadMe\README_DSA.md" />
+    <None Include="scripts\fetch_wordle_answers.py" />
+    <None Include="scripts\generate_wordlists_full.py" />
+    <None Include="ReadMe\VISUAL_ENHANCEMENTS.md" />
+    <None Include="scripts\skibidi.py" />
+    <None Include="scripts\skibidi2.py" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
