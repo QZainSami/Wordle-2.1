@@ -1,5 +1,21 @@
 to display emojis
 
+Open Project Properties:
+    In the Solution Explorer, right-click on your C++ project name.
+    Select Properties.
+
+Navigate to Debugging Settings:
+    In the Property Pages window, go to Configuration Properties → Debugging.
+
+Change the value for the Command field.
+Set it to:
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+Then, change the Command Arguments field to:
+-Command "& { [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new(); Start-Process -FilePath '$(TargetPath)' -NoNewWindow -Wait }"
+or
+-NoExit -Command "& \"$(TargetPath)\""
+
+
 1. open terminal
 2. cd to project: cd "C:\Users\qsami\source\repos\Wordle 2.1\x64\Debug"
 
