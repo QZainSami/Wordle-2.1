@@ -85,5 +85,7 @@
     <None Include="ReadMe\VISUAL_ENHANCEMENTS.md">
       <Filter>ReadMe</Filter>
     </None>
+    <None Include="ReadMe\DSA_AND_FILE_DOCUMENTATION.pdf" />
+    <None Include="ReadMe\Enabling UFT-8 Encoding.pdf" />
   </ItemGroup>
 </Project>

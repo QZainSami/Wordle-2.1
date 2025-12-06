@@ -11,8 +11,8 @@ const int EASY_WORD_LEN = 4;
 const int MEDIUM_WORD_LEN = 5;
 const int HARD_WORD_LEN = 6;
 
-const int EASY_ATTEMPTS = 5;
-const int MEDIUM_ATTEMPTS = 6;
-const int HARD_ATTEMPTS = 7;
+const int EASY_ATTEMPTS = 4;
+const int MEDIUM_ATTEMPTS = 5;
+const int HARD_ATTEMPTS = 6;
 
 #endif

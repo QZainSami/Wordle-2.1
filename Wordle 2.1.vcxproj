@@ -148,7 +148,9 @@
     <ClCompile Include="Wordle_wordlists.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ReadMe\DSA_AND_FILE_DOCUMENTATION.pdf" />
     <None Include="ReadMe\DSA_IMPLEMENTATION.md" />
+    <None Include="ReadMe\Enabling UFT-8 Encoding.pdf" />
     <None Include="ReadMe\README_DSA.md" />
     <None Include="scripts\fetch_wordle_answers.py" />
     <None Include="scripts\generate_wordlists_full.py" />
